@@ -19,6 +19,9 @@ chef_rvm 'ubuntu' do
   rvmrc({
     'rvm_autoupdate_flag'=> '1'
   })
+  gemrc({
+    'install' => '--no-document'
+  })
 end
 ```
 

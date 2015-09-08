@@ -45,9 +45,11 @@ end
 def create_or_update_rvmvc
   if rvm.system?
     rvmrc_file = '/etc/rvmrc'
+    gemrc_file = '/etc/gemrc'
     rvm_path = '/usr/local/rvm/'
   else
     rvmrc_file = "#{rvm.user_home}/.rvmrc"
+    gemrc_file = "#{rvm.user_home}/.gemrc"
     rvm_path = "#{rvm.user_home}/.rvm"
   end
 
@@ -61,6 +63,18 @@ def create_or_update_rvmvc
       rvmrc: new_resource.rvmrc_properties.merge(
         rvm_path: rvm_path
       )
+    )
+    action :create
+  end
+
+  template gemrc_file do
+    cookbook 'chef_rvm'
+    source 'gemrc.erb'
+    owner new_resource.user
+    mode '0644'
+    variables(
+        system_install: rvm.system?,
+        gemrc: new_resource.gemrc_properties
     )
     action :create
   end

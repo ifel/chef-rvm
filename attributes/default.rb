@@ -6,5 +6,7 @@ default['chef_rvm']['packages'] = value_for_platform(
 
 default['chef_rvm']['rvmrc']['rvm_gem_options'] = '--no-rdoc --no-ri'
 default['chef_rvm']['rvmrc']['rvm_autoupdate_flag'] = 0
+default['chef_rvm']['gemrc']['install'] = '--no-document'
+default['chef_rvm']['gemrc']['update']  = '--no-document'
 default['chef_rvm']['users'] = {}
 default['chef_rvm']['verbose'] = false
